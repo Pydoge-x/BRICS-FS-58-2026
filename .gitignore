@@ -1,1 +1,6 @@
-./Task1/datasets
+Task1/datasets/
+.vscode
+.qoder
+.trea
+.idea
+./zhenti
