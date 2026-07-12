@@ -4,3 +4,5 @@ Task1/datasets/
 .trea
 .idea
 zhenti/
+/Task1/models/
+/Task1/modules/__pycache__

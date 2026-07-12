@@ -12,7 +12,7 @@ TEST_DIR =  "../datasets/Fer-2013/test"
 IMAGE_SIZE = 224 # 预训练模型的标准输入尺寸
 
 BATCH_SIZE = 64 # 每轮的传入图片数量
-NUM_WORKS = 4 # CPU运行核的数量
+NUM_WORKS = 8 # CPU运行核的数量
 
 # ImageNet 标准化参数（预训练模型就是用这组均值/方差训练的）
 NORM_MEAN = [0.485, 0.456, 0.406]
@@ -27,9 +27,16 @@ train_transform = transforms.Compose([
     transforms.RandomHorizontalFlip(p=0.5),
     # 添加轻微旋转，增强鲁棒性
     transforms.RandomRotation(degrees=10),
+    # 添加颜色抖动，由于是黑白图片，所以不需要进行色调和饱和度的调整
+    transforms.ColorJitter(brightness=0.18, contrast=0.22, saturation=0,hue=0),
+    
     
     transforms.ToTensor(), # 转换成张量格式，将[0,255]转化成[0,1]之间的维度
-    transforms.Normalize(mean=NORM_MEAN, std=NORM_STD) # 标准化
+    transforms.Normalize(mean=NORM_MEAN, std=NORM_STD), # 标准化
+    # 添加随机擦除 
+    transforms.RandomErasing(p=0.5, scale=(0.02, 0.03),ratio=(0.3, 0.3), value="random"),
+    
+    
     ])
 
 # 测试集之作必要的预处理，不做随机增强
@@ -51,7 +58,8 @@ train_loader = DataLoader(
     batch_size=BATCH_SIZE,
     shuffle=True,
     num_workers=NUM_WORKS,
-    pin_memory=True
+    pin_memory=True,
+    persistent_workers=True
     )
 
 test_loader = DataLoader(
@@ -59,7 +67,8 @@ test_loader = DataLoader(
     batch_size=BATCH_SIZE,
     shuffle=False,
     num_workers=NUM_WORKS,
-    pin_memory=True
+    pin_memory=True,
+    persistent_workers=True
     )
 
 if __name__ == '__main__':
