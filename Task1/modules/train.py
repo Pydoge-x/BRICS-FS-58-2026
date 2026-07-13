@@ -3,7 +3,7 @@ os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 import timm
 import torch
 import torch.nn as nn
-from dataset import train_loader, test_loader, train_dataset, test_dataset
+from dataset import get_train_loader, get_test_loader
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from tqdm import tqdm
 torch.backends.cudnn.benchmark = True
@@ -44,6 +44,9 @@ def evaluate(model, loader):
     return acc,precision,recall,f1
 
 if __name__ == '__main__':
+    # 在 __main__ 中创建 DataLoader，避免 Windows 多进程 spawn 问题
+    train_loader = get_train_loader()
+    test_loader = get_test_loader()
     print(f"模型：{MODEL_NAME}, 设备：{DEVICE}")
     print(f"分类头输出维度：{model.get_classifier().out_features}")
     scaler = torch.amp.GradScaler('cuda')
