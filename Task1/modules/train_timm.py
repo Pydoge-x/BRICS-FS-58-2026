@@ -11,7 +11,7 @@ torch.backends.cudnn.benchmark = True
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 NUM_CLASSES = 7
 EPOCHS = 30
-MODEL_NAME = "mobilevit_xs"
+MODEL_NAME = "mobilevit_xs"  # timm模型名全小写无横杠，可选: resnet50 / vgg16_bn / mobilenetv3_small_100 / mobilevit_xs
 
 # 2. 加载预训练模型
 # timm.create_model 自动下载预训练权重，num_classes=7自动替换最后一层
@@ -21,7 +21,7 @@ model = model.to(DEVICE)
 # 3. 损失函数和优化器
 criterion = nn.CrossEntropyLoss() # 使用交叉熵损失函数，多分类任务的标准损失函数
 
-optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
+optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=1e-5)
 
 # 4. 评估函数
 def evaluate(model, loader):

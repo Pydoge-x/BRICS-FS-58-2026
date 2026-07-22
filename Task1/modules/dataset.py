@@ -59,7 +59,7 @@ test_transform = transforms.Compose([
     ])
 
 # 2. 加载数据集并创建DataLoader（封装为函数，避免Windows多进程spawn问题）
-def et_train_loader(train_dir=TRAIN_DIR, batch_size=BATCH_SIZE,
+def get_train_loader(train_dir=TRAIN_DIR, batch_size=BATCH_SIZE,
                      num_workers=NUM_WORKS, transform=train_transform):
     """创建训练集 DataLoader"""
     train_dataset = datasets.ImageFolder(train_dir, transform=transform)
