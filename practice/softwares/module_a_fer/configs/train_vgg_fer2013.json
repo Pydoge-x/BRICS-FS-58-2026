@@ -1,0 +1,39 @@
+{
+  "dataset": {
+    "name": "fer2013",
+    "root_dir": "dataset_data/fer2013",
+    "split": "train",
+    "image_size": 224,
+    "use_augmentation": true
+  },
+  "model": {
+    "type": "vgg",
+    "name": "vgg16",
+    "num_classes": 7,
+    "pretrained": true,
+    "dropout_rate": 0.2
+  },
+  "training": {
+    "epochs": 50,
+    "batch_size": 16,
+    "num_workers": 4,
+    "optimizer": "AdamW",
+    "lr": 1e-4,
+    "weight_decay": 1e-4,
+    "scheduler": "CosineAnnealingWarmRestarts",
+    "warmup_epochs": 5,
+    "T_0": 25,
+    "T_mult": 2,
+    "eta_min": 1e-6,
+    "label_smoothing": 0.1,
+    "use_focal_loss": true,
+    "mixup_alpha": 0.2,
+    "early_stop_patience": 15,
+    "seed": 42,
+    "use_amp": true,
+    "grad_clip": 1.0,
+    "save_dir": "checkpoints/vgg_fer2013",
+    "save_interval": 10,
+    "keep_checkpoint_max": 5
+  }
+}
