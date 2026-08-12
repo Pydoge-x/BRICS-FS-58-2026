@@ -1,4 +1,4 @@
-import timm 
+import timm
 import torch
 
 # 配置
