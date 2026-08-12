@@ -10,10 +10,9 @@ buffalo
 buffalo_l.zip
 module_1_fer.tar.gz
 module_2_behavior.tar.gz
-
-practice/softwares/module_a_fer/checkpoints
-practice/softwares/module_a_fer/dataset_data
-practice/softwares/module_a_fer/models
-practice/softwares/module_a_fer/pretrained-models
-practice/softwares/module_a_fer/data
+module_a_fer/checkpoints
+module_a_fer/dataset_data
+module_a_fer/models
+module_a_fer/pretrained-models
+module_a_fer/data
 __pycache__
