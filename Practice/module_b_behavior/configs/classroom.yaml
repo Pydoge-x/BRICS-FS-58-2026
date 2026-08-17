@@ -1,0 +1,26 @@
+# 课堂场景：YOLO-Pose + ByteTrack + 规则行为
+scene: classroom
+
+models:
+  detect: models/yolo/yolov8n.pt
+  pose: models/yolo/yolov8n-pose.pt
+
+inference:
+  conf: 0.25
+  iou: 0.45
+  imgsz: 640
+  device: cpu
+  classes: [0]
+
+tracking:
+  enabled: true
+  tracker: bytetrack.yaml
+
+keyframes:
+  interval: 120
+  max_total: 20
+
+clip:
+  min_frames: 16
+  max_frames: 32
+  fps: 30

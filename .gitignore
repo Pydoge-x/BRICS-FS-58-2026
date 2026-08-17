@@ -15,4 +15,9 @@ module_a_fer/dataset_data
 module_a_fer/models
 module_a_fer/pretrained-models
 module_a_fer/data
+Practice/module_a_fer/checkpoints
+Practice/module_a_fer/dataset_data
+Practice/module_a_fer/models
+Practice/module_a_fer/pretrained-models
+Practice/module_a_fer/data
 __pycache__
