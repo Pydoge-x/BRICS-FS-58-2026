@@ -177,6 +177,14 @@ class FERTrainer:
            return nn.CrossEntropyLoss(label_smoothing=self.config.label_smoothing)
         """
         # TODO: 实现损失函数创建
+        if self.config.use_focal_loss == True:
+            from .losses import FocalLoss
+            return FocalLoss(alpha=self.config.focal_alpha,
+                             gamma=self.config.focal_gamma,
+                             num_classes=self.config.num_classes)
+        else:
+            return nn.CrossEntropyLoss(label_smoothing=self.config.label_smoothing)
+        
         raise NotImplementedError("TODO: 请实现 FERTrainer._create_criterion() 方法")
     
     def _create_optimizer(self) -> optim.Optimizer:
@@ -193,7 +201,27 @@ class FERTrainer:
         所有参数从 self.config 获取
         """
         # TODO: 实现优化器创建
-        raise NotImplementedError("TODO: 请实现 FERTrainer._create_optimizer() 方法")
+        if self.config.optimizer_type == 'Adam':
+            return optim.Adam(
+                params=self.model.parameters(),
+                lr=self.config.lr,
+                weight_decay=self.config.weight_decay
+                )
+        elif self.config.optimizer_type == 'AdamW':
+            return optim.AdamW(
+                params=self.model.parameters(),
+                lr=self.config.lr,
+                weight_decay=self.config.weight_decay
+                )
+        elif self.config.optimizer_type == 'SGD':
+            return optim.SGD(
+                params=self.model.parameters(),
+                lr=self.config.lr,
+                momentum=self.config.momentum,
+                weight_decay=self.config.weight_decay
+                )
+        else:
+            raise ValueError(f"不支持的优化器: {self.config.optimizer_type}")
     
     def _create_scheduler(self) -> Optional[optim.lr_scheduler._LRScheduler]:
         """
@@ -208,7 +236,28 @@ class FERTrainer:
         - 'LinearWarmup' 或 其他: return None
         """
         # TODO: 实现学习率调度器创建
-        raise NotImplementedError("TODO: 请实现 FERTrainer._create_scheduler() 方法")
+        if self.config.scheduler_type == 'StepLR':
+            return optim.lr_scheduler.StepLR(
+                self.optimizer, 
+                step_size=20, 
+                gamma=0.1
+                )
+        elif self.config.scheduler_type == 'CosineAnnealingLR':
+            return optim.lr_scheduler.CosineAnnealingLR(
+                self.optimizer,
+                T_max=self.config.epochs,
+                eta_min=self.config.eta_min)
+        elif self.config.scheduler_type == 'CosineAnnealingWarmRestarts':
+            return optim.lr_scheduler.CosineAnnealingWarmRestarts(
+                self.optimizer,
+                T_0=self.config.T_0,
+                T_mult=self.config.T_mult, 
+                eta_min=self.config.eta_min
+                )
+        elif self.config.scheduler_type == 'LinearWarmup':
+            return None
+        else:
+            return None
     
     def _warmup_scheduler(self, epoch: int):
         """Warmup学习率调整"""
@@ -264,7 +313,96 @@ class FERTrainer:
         ```
         """
         # TODO: 实现训练一个epoch的逻辑
-        raise NotImplementedError("TODO: 请实现 FERTrainer.train_epoch() 方法")
+        self.model.train()
+        total_loss, correct, total = 0.0, 0, 0
+        pbar = tqdm(self.train_loader, desc=f'Epoch {epoch} [Train]')
+        for batch_idx, data in enumerate(pbar):
+            # 处理不同数据集的返回格式
+            # Dataloader可能返回List或Tuple:
+            if isinstance(data, (tuple,list)):
+                if len(data) == 3:
+                    images, labels, _ = data # MultiDataset返回(images, label, dataset_idx)
+                else:
+                    images, labels = data # 普通数据集返回(images, label)
+            else:
+                images, labels = data # 备用处理
+
+            # 确保labels 是Tensor
+            if not isinstance(labels, torch.Tensor):
+                # 如果是tuple或者list转换为Tensor
+                if isinstance(labels, (tuple, list)):
+                    # 检查是否是mixup格式(y_a, y_b, lam)
+                    if len(labels) == 3 and isinstance(labels[2], (float, torch.Tensor)):
+                        # 这是mixup格式，但是我们没有启用mixup，所以只取第一个label
+                        labels = labels[0]
+                    else:
+                        labels = torch.tensor(labels)
+                else:
+                    labels = torch.tensor(labels)
+
+            images = images.to(self.device)
+
+            # 确保labels是Tensor并且在正确的设备上
+            if isinstance(labels, torch.Tensor):
+                labels = labels.to(self.device)
+            else:
+                # 最后的安全检查
+                labels = torch.tensor(labels).to(self.device)
+
+            # Mixup/CutMix(可选)
+            if self.config.mixup_alpha > 0 and np.random.rand() < 0.5:
+                images, labels = self._mixup(images=images, labels=labels)
+
+            # 前向传播
+            self.optimizer.zero_grad()
+            if self.scaler is not None:
+                with autocast():
+                    outputs = self.model(images)
+                    loss = self.criterion(outputs, labels)
+                # 反向传播
+                self.scaler.scale(loss).backward()
+
+                # 梯度裁剪
+                if self.config.grad_clip > 0:
+                    self.scaler.unscale_(self.optimizer)
+                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.config.grad_clip)
+
+                self.scaler.step(self.optimizer)
+                self.scaler.update()
+            else:
+                outputs = self.model(images)
+                loss = self.criterion(outputs, labels)
+                loss.backward()
+
+                if self.config.grad_clip > 0:
+                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.config.grad_clip)
+
+                self.optimizer.step()
+
+            # 统计
+            total_loss += loss.item()
+
+            # 计算准确度（Mixup时需要特殊处理）
+            if isinstance(labels, tuple): # Mixup
+                _, predicted = outputs.max(1)
+                total += labels[0].size(0)
+                correct += (predicted == labels[0]).sum().item() * labels[2]
+                correct += (predicted == labels[1]).sum().item() * (1-labels[2])
+            else:
+                _, predicted = outputs.max(1)
+                total += labels.size(0)
+                correct += predicted.eq(labels).sum().item()
+
+            # 更新进度条
+            current_lr = self.optimizer.param_groups[0]['lr']
+            pbar.set_postfix({
+                'loss': total_loss / (batch_idx + 1),
+                'acc' : 100.*correct / total,
+                'lr':current_lr
+                })
+            
+        return {'loss': total_loss/len(self.train_loader), 
+                'acc': 100.*correct/total}
     
     def _mixup(self, images: torch.Tensor, labels: torch.Tensor) -> Tuple:
         """Mixup数据增强"""
@@ -293,7 +431,7 @@ class FERTrainer:
         5. 调用 self.model(images) 进行前向传播得到 outputs
         6. 调用 self.criterion(outputs, labels) 计算损失
         7. 统计累计损失和准确率
-        8. 可选：统计各类别准确率（使用 class_correct, class_total）
+        8. 可选：统计各类别准确率(使用 class_correct, class_total)
         9. 返回 {'loss': 平均损失, 'acc': 平均准确率(%), 'class_acc': 各类别准确率数组}
 
         参考框架：
@@ -317,7 +455,49 @@ class FERTrainer:
         ```
         """
         # TODO: 实现验证逻辑
-        raise NotImplementedError("TODO: 请实现 FERTrainer.validate() 方法")
+        self.model.eval()
+
+        total_loss = 0.0
+        correct = 0
+        total = 0
+
+        # 各类别准确率
+        class_correct = np.zeros(self.config.num_classes)
+        class_total = np.zeros(self.config.num_classes)
+
+        with torch.no_grad():
+            for data in tqdm(loader, desc=f'[{desc}]'):
+                # 处理不同数据集的返回格式
+                if isinstance(data, tuple) and len(data) == 3:
+                    images, labels, _ = data
+                else:
+                    images, labels = data
+
+                images = images.to(self.device)
+                labels = labels.to(self.device)
+
+                outputs = self.model(images)
+                loss = self.criterion(outputs, labels)
+
+                total_loss += loss.item()
+                _,predicted = outputs.max(1)
+                total += labels.size(0)
+                correct += predicted.eq(labels).sum().item()
+
+                # 各类别统计
+                for i in range(self.config.num_classes):
+                    class_total[i] += (labels == i).sum().item()
+                    class_correct[i] += ((predicted == i) & (labels == i )).sum().item()
+
+        # 各类别准确率
+        class_acc = class_correct / class_total * 100
+
+        return {
+            'loss':total_loss / len(loader),
+            'acc': 100.*correct / total,
+            'class_acc' : class_acc
+            }
+
     
     def train(self) -> float:
         """
@@ -351,8 +531,112 @@ class FERTrainer:
         - epoch 从 1 开始
         """
         # TODO: 实现完整训练流程
-        raise NotImplementedError("TODO: 请实现 FERTrainer.train() 方法")
-    
+        print("\n" + "="*50)
+        print(f"开始训练: {self.config.model_type} / {self.config.model_name}")
+        print("=" * 50)
+
+        start_time = time.time()
+
+        for epoch in range(1, self.config.epochs + 1):
+            epoch_start = time.time()
+
+            # warmup
+            if epoch <= self.config.warmup_epochs:
+                self._warmup_scheduler(epoch=epoch)
+
+            # 训练
+            train_metrics = self.train_epoch(epoch=epoch)
+
+            # 验证
+            if self.val_loader is not None:
+                val_metrics = self.validate(self.val_loader, 'Val')
+            else:
+                val_metrics = {'loss':0,
+                               'acc':0,
+                               'class_acc':np.zeros(self.config.num_classes)}
+
+            # 更新学习率
+            if self.scheduler is not None and epoch > self.config.warmup_epochs:
+                self.scheduler.step()
+
+            # 记录历史
+            current_lr = self.optimizer.param_groups[0]['lr']
+            self.history['train_loss'].append(train_metrics['loss'])
+            self.history['train_acc'].append(train_metrics['acc'])
+            self.history['val_loss'].append(val_metrics['loss'])
+            self.history['val_acc'].append(val_metrics['acc'])
+            self.history['lr'].append(current_lr)
+
+            epoch_time = time.time() - epoch_start
+
+            # 打印结果
+            print(f"\nEpoch {epoch} / {self.config.epochs}")
+            print(f"    Train Loss: {train_metrics['loss']:.4f}, Train Acc: {train_metrics['acc']:.2f}%")
+            if self.val_loader is not None:
+                print(f"    Val Loss: {val_metrics['loss']:.4f}, Val Acc: {val_metrics['acc']:.2f}%")
+
+            print(f"    LR:{current_lr:.6f}, Time:{epoch_time:.1f}s")
+
+            # 保存最佳模型
+            if val_metrics['acc'] > self.best_acc:
+                self.best_acc = val_metrics['acc']
+                self.best_epoch = epoch
+                self.early_stop_counter = 0 # 重置早停计数器
+
+                save_path = os.path.join(self.config.save_dir, "best_model.pth")
+                save_model(
+                    self.model,
+                    save_path,
+                    self.config.model_type,
+                    self.config.model_name,
+                    self.optimizer,
+                    epoch,
+                    self.best_acc,
+                    include_optimizer=False, # best_model 仅推理使用，不需要优化器状态
+                    history=self.history
+                    )
+                print(f"    [SAVED] 保存最佳模型 (Acc : {self.best_acc:.2f}%)")
+
+            else:
+                self.early_stop_counter += 1
+
+            # 早停检查
+            patience = self.config.early_stop_patience
+            if patience > 0 and self.early_stop_counter >= patience:
+                print(f"\n [EARLY STOP ]Val Acc 连续{patience} 个 epoch 未提升，停止训练")
+                print(f"    最佳Acc:{self.best_acc:.2f}% (Epoch { self.best_epoch})")
+                break
+
+            # 定期保存 + 自动清理旧的checkpoint
+            if epoch % self.config.save_interval == 0:
+                save_path = os.path.join(self.config.save_dir, f"checkpoint_epoch_{epoch}.pth")
+                save_model(
+                        self.model,
+                        save_path,
+                        self.config.model_type,
+                        self.config.model_name,
+                        self.optimizer,
+                        epoch,
+                        self.best_acc,
+                        include_optimizer=True, # 定期 checkpoint 保留优化器状态用于恢复训练
+                )
+                # 自动清理旧checkpoint，只保留最近N个
+                self._cleanup_old_checkpoints()
+
+        total_time = time.time() - start_time
+
+        print("\n" + "="*50)
+        print(f"训练完成!")
+        print(f"    最佳准确率: {self.best_acc:.2f}% (Epoch { self.best_epoch})")
+        print(f"    总训练时长: {total_time / 60:.1f} 分钟")
+        print("=" * 50)
+
+        # 保存训练历史
+        history_path = os.path.join(self.config.save_dir, 'history.json')
+        with open(history_path, 'w') as f:
+            json.dump(self.history,f,indent=2)
+
+        return self.best_acc
     def _cleanup_old_checkpoints(self):
         """自动清理旧的定期checkpoint，只保留最近 keep_checkpoint_max 个"""
         if self.config.keep_checkpoint_max <= 0:
@@ -399,4 +683,24 @@ class FERTrainer:
         5. 返回 test_metrics
         """
         # TODO: 实现测试流程
-        raise NotImplementedError("TODO: 请实现 FERTrainer.test() 方法")
+        if self.test_loader is None:
+            print("未提供测试数据")
+            return {}
+        print("\n测试最佳模型...")
+
+        # 加载最佳模型
+        best_path = os.path.join(self.config.save_dir, 'best_model.pth')
+        if os.path.exists(best_path):
+            checkpoint = torch.load(best_path, map_location=self.device)
+            self.model.load_state_dict(checkpoint['model_state_dict'])
+
+        test_metrics = self.validate(self.test_loader, 'Test')
+
+        print(f"\n测试结果:")
+        print(f"    Loss:{test_metrics['loss']:.4f}")
+        print(f"    Accuracy:{test_metrics['acc']:.2f}%")
+        print(f"\n各类别准确率:")
+        for i, label in enumerate(self.EXPRESSION_LABELS):
+            print(f"    {label} : { test_metrics['class_acc'][i]:.2f}%")
+
+        return test_metrics
