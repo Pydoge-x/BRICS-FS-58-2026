@@ -22,8 +22,8 @@
 torch==2.0.1                  # CPU: +cpu / CUDA: +cu118
 torchvision==0.15.2
 numpy>=1.24.0,<2.0.0          # 注意：必须 <2.0，兼容 torch 2.0.1 与 ultralytics
-opencv-python>=4.8.0
-opencv-contrib-python>=5.0.0
+opencv-python>=4.6.0
+opencv-contrib-python>=4.6.0
 
 # --- YOLO 检测 + ByteTrack 追踪 ---
 ultralytics>=8.0.0

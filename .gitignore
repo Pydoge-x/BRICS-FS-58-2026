@@ -22,3 +22,14 @@ Practice/module_a_fer/pretrained-models
 Practice/module_a_fer/data
 __pycache__
 视频
+.continue
+
+# 忽略 ROS2 的 deb 包和安装文件
+sw/BRICS-FS-58-2026/
+*.deb
+*.tar.gz
+*.zip
+*.mp4
+*.ppt
+*.pptx
+*.tar

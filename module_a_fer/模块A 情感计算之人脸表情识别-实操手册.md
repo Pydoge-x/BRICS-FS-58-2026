@@ -681,10 +681,10 @@ print_model_info(model, 'resnet', 'resnet50')
 
 | 模型 | 参数量 | 我的实测值 |
 |:---|:---|:---|
-| VGG-16 | ~135M | |
-| ResNet-50 | ~25M | |
-| MobileNetV3-Small | ~2.5M | |
-| MobileViT-XS | ~2.3M | |
+| VGG-16 | ~135M | 134.29M|
+| ResNet-50 | ~25M | 23.52M|
+| MobileNetV3-Small | ~2.5M | 1.26M|
+| MobileViT-XS | ~2.3M | 1.94M|
 
 ---
 
@@ -1435,9 +1435,9 @@ python -c "import json; ts=sorted(__import__('os').listdir('checkpoints/mobilene
 ### 5.6 动手任务
 
 1. **跑通 MobileNetV3 训练**（30~50 epoch），记录以下数据：
-   - 最佳 Val Acc 出现在第几个 epoch
-   - 最终 Train Acc 与 Val Acc 的差值（判断过拟合程度）
-   - 整个训练耗时
+   - 最佳 Val Acc 出现在第几个 epoch  **第29个epoch， Val ACC为69.14%**
+   - 最终 Train Acc 与 Val Acc 的差值（判断过拟合程度） **在第29个epoch时，插值为9.43%，TrainACC > ValACC**
+   - 整个训练耗时 **大约在40分钟左右，总共训练40轮**
 
 2. **修改配置对比实验**：复制一份配置文件，修改：
    - 将 `early_stop_patience` 设为 0（禁用早停），对比训练停止时机
