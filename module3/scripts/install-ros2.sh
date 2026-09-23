@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 在 Ubuntu 22.04 (jammy) 上安装 ROS 2 Humble Desktop + turtlesim
 # 优先使用 packages/ros2/debs 离线包；无离线包时走清华 apt 源。
-set -euo pipefail
+set -eo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DEB_DIR="${ROOT}/ros2/debs"

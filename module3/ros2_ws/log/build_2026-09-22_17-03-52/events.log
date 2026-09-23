@@ -1,0 +1,31 @@
+[0.000000] (-) TimerEvent: {}
+[0.001182] (cmd_vel_pub) JobQueued: {'identifier': 'cmd_vel_pub', 'dependencies': OrderedDict()}
+[0.002952] (cmd_vel_pub) JobStarted: {'identifier': 'cmd_vel_pub'}
+[0.097251] (-) TimerEvent: {}
+[0.199400] (-) TimerEvent: {}
+[0.301460] (-) TimerEvent: {}
+[0.403458] (-) TimerEvent: {}
+[0.505272] (-) TimerEvent: {}
+[0.607834] (-) TimerEvent: {}
+[0.710606] (-) TimerEvent: {}
+[0.812745] (-) TimerEvent: {}
+[0.914622] (-) TimerEvent: {}
+[1.016738] (-) TimerEvent: {}
+[1.118778] (-) TimerEvent: {}
+[1.220724] (-) TimerEvent: {}
+[1.322796] (-) TimerEvent: {}
+[1.424942] (-) TimerEvent: {}
+[1.526950] (-) TimerEvent: {}
+[1.629372] (-) TimerEvent: {}
+[1.732379] (-) TimerEvent: {}
+[1.834721] (-) TimerEvent: {}
+[1.936915] (-) TimerEvent: {}
+[2.038537] (-) TimerEvent: {}
+[2.140578] (-) TimerEvent: {}
+[2.242731] (-) TimerEvent: {}
+[2.344683] (-) TimerEvent: {}
+[2.446687] (-) TimerEvent: {}
+[2.548636] (-) TimerEvent: {}
+[2.563346] (cmd_vel_pub) StderrLine: {'line': b'Traceback (most recent call last):\n  File "/usr/lib/python3/dist-packages/colcon_core/executor/__init__.py", line 91, in __call__\n    rc = await self.task(*args, **kwargs)\n  File "/usr/lib/python3/dist-packages/colcon_core/task/__init__.py", line 120, in __call__\n    return await task_method(*args, **kwargs)\n  File "/usr/lib/python3/dist-packages/colcon_ros/task/ament_python/build.py", line 102, in build\n    return await extension.build(additional_hooks=additional_hooks)\n  File "/usr/lib/python3/dist-packages/colcon_core/task/python/build.py", line 165, in build\n    temp_symlinks = self._symlinks_in_build(args, setup_py_data)\n  File "/usr/lib/python3/dist-packages/colcon_core/task/python/build.py", line 400, in _symlinks_in_build\n    os.symlink(src, dst)\nOSError: [Errno 95] Operation not supported: \'/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/src/cmd_vel_pub/setup.py\' -> \'/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/setup.py\'\n'}
+[2.589984] (cmd_vel_pub) JobEnded: {'identifier': 'cmd_vel_pub', 'rc': 1}
+[2.603044] (-) EventReactorShutdown: {}
