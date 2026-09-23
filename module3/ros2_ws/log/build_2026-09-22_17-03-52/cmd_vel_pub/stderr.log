@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/colcon_core/executor/__init__.py", line 91, in __call__
+    rc = await self.task(*args, **kwargs)
+  File "/usr/lib/python3/dist-packages/colcon_core/task/__init__.py", line 120, in __call__
+    return await task_method(*args, **kwargs)
+  File "/usr/lib/python3/dist-packages/colcon_ros/task/ament_python/build.py", line 102, in build
+    return await extension.build(additional_hooks=additional_hooks)
+  File "/usr/lib/python3/dist-packages/colcon_core/task/python/build.py", line 165, in build
+    temp_symlinks = self._symlinks_in_build(args, setup_py_data)
+  File "/usr/lib/python3/dist-packages/colcon_core/task/python/build.py", line 400, in _symlinks_in_build
+    os.symlink(src, dst)
+OSError: [Errno 95] Operation not supported: '/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/src/cmd_vel_pub/setup.py' -> '/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/setup.py'

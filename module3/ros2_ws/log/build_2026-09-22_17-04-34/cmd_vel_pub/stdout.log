@@ -1,0 +1,35 @@
+running egg_info
+creating ../../build/cmd_vel_pub/cmd_vel_pub.egg-info
+writing ../../build/cmd_vel_pub/cmd_vel_pub.egg-info/PKG-INFO
+writing dependency_links to ../../build/cmd_vel_pub/cmd_vel_pub.egg-info/dependency_links.txt
+writing entry points to ../../build/cmd_vel_pub/cmd_vel_pub.egg-info/entry_points.txt
+writing requirements to ../../build/cmd_vel_pub/cmd_vel_pub.egg-info/requires.txt
+writing top-level names to ../../build/cmd_vel_pub/cmd_vel_pub.egg-info/top_level.txt
+writing manifest file '../../build/cmd_vel_pub/cmd_vel_pub.egg-info/SOURCES.txt'
+reading manifest file '../../build/cmd_vel_pub/cmd_vel_pub.egg-info/SOURCES.txt'
+writing manifest file '../../build/cmd_vel_pub/cmd_vel_pub.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build
+creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib
+creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib/cmd_vel_pub
+copying cmd_vel_pub/publisher.py -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib/cmd_vel_pub
+copying cmd_vel_pub/__init__.py -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib/cmd_vel_pub
+running install
+running install_lib
+creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub
+copying /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib/cmd_vel_pub/publisher.py -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub
+copying /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib/cmd_vel_pub/__init__.py -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub
+byte-compiling /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub/publisher.py to publisher.cpython-310.pyc
+byte-compiling /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/share/ament_index
+creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/share/ament_index/resource_index
+creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/share/ament_index/resource_index/packages
+copying resource/cmd_vel_pub -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/share/ament_index/resource_index/packages
+copying package.xml -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/share/cmd_vel_pub
+running install_egg_info
+Copying ../../build/cmd_vel_pub/cmd_vel_pub.egg-info to /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub-0.0.0-py3.10.egg-info
+running install_scripts
+Installing publisher script to /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/cmd_vel_pub
+writing list of installed files to '/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/install.log'

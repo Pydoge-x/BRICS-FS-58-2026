@@ -1,0 +1,73 @@
+[0.000000] (-) TimerEvent: {}
+[0.002022] (cmd_vel_pub) JobQueued: {'identifier': 'cmd_vel_pub', 'dependencies': OrderedDict()}
+[0.002652] (cmd_vel_pub) JobStarted: {'identifier': 'cmd_vel_pub'}
+[0.096435] (-) TimerEvent: {}
+[0.198389] (-) TimerEvent: {}
+[0.300449] (-) TimerEvent: {}
+[0.402679] (-) TimerEvent: {}
+[0.505142] (-) TimerEvent: {}
+[0.607072] (-) TimerEvent: {}
+[0.709206] (-) TimerEvent: {}
+[0.811079] (-) TimerEvent: {}
+[0.913102] (-) TimerEvent: {}
+[1.015511] (-) TimerEvent: {}
+[1.117431] (-) TimerEvent: {}
+[1.219386] (-) TimerEvent: {}
+[1.321201] (-) TimerEvent: {}
+[1.423087] (-) TimerEvent: {}
+[1.528432] (-) TimerEvent: {}
+[1.630457] (-) TimerEvent: {}
+[1.665199] (cmd_vel_pub) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/cmd_vel_pub', 'build', '--build-base', '/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build', 'install', '--record', '/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/install.log', '--install-scripts', '$base/lib/cmd_vel_pub', '--single-version-externally-managed', 'install_data'], 'cwd': '/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/src/cmd_vel_pub', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'zh_CN:zh', 'USER': 'dev', 'SSH_CLIENT': '192.168.209.1 61346 22', 'XDG_SESSION_TYPE': 'tty', 'GIT_ASKPASS': '/home/dev/.vscode-server/cli/servers/Stable-7debcd0e2acdea1c52de81bf9ee1620444407dda/server/extensions/git/dist/askpass.sh', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/rti.com/rti_connext_dds-6.0.1/lib/x64Linux4gcc7.3.0:/opt/rti.com/rti_connext_dds-6.0.1/bin:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'BROWSER': '/home/dev/.vscode-server/cli/servers/Stable-7debcd0e2acdea1c52de81bf9ee1620444407dda/server/bin/helpers/browser.sh', 'MOTD_SHOWN': 'pam', 'HOME': '/home/dev', 'OLDPWD': '/home/dev/桌面/BRICS-FS-58-2026/module3/ros2_ws', 'TERM_PROGRAM_VERSION': '1.138.0', 'CONNEXTDDS_DIR': '/opt/rti.com/rti_connext_dds-6.0.1', 'VSCODE_IPC_HOOK_CLI': '/run/user/1000/vscode-ipc-a688d765-344c-43f6-9c0c-d89ae9167c05.sock', 'ROS_PYTHON_VERSION': '3', 'NDDSHOME': '/opt/rti.com/rti_connext_dds-6.0.1', 'VSCODE_GIT_ASKPASS_MAIN': '/home/dev/.vscode-server/cli/servers/Stable-7debcd0e2acdea1c52de81bf9ee1620444407dda/server/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/home/dev/.vscode-server/cli/servers/Stable-7debcd0e2acdea1c52de81bf9ee1620444407dda/server/node', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'ROS_DISTRO': 'humble', 'LOGNAME': 'dev', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '5', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/rti.com/rti_connext_dds-6.0.1/lib/x64Linux4gcc7.3.0:/opt/rti.com/rti_connext_dds-6.0.1/bin:/opt/ros/humble/bin:/home/dev/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/dev/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/dev/.vscode-server/cli/servers/Stable-7debcd0e2acdea1c52de81bf9ee1620444407dda/server/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'zh_CN.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-146efcf9a0.sock', 'TERM_PROGRAM': 'vscode', 'AMENT_PREFIX_PATH': '/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'AMENT_TRACE_SETUP_FILES': '0', 'CONNEXTDDS_ARCH': 'x64Linux4gcc7.3.0', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'PWD': '/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub', 'COPILOT_DEBUG_NONCE': 'bede4b1ccc4728237b52bd549f7cd524', 'SSH_CONNECTION': '192.168.209.1 61346 192.168.209.129 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[1.731036] (-) TimerEvent: {}
+[1.833242] (-) TimerEvent: {}
+[1.935215] (-) TimerEvent: {}
+[2.037188] (-) TimerEvent: {}
+[2.139202] (-) TimerEvent: {}
+[2.241188] (-) TimerEvent: {}
+[2.314201] (cmd_vel_pub) StdoutLine: {'line': b'running egg_info\n'}
+[2.321739] (cmd_vel_pub) StdoutLine: {'line': b'creating ../../build/cmd_vel_pub/cmd_vel_pub.egg-info\n'}
+[2.330520] (cmd_vel_pub) StdoutLine: {'line': b'writing ../../build/cmd_vel_pub/cmd_vel_pub.egg-info/PKG-INFO\n'}
+[2.343726] (-) TimerEvent: {}
+[2.347100] (cmd_vel_pub) StdoutLine: {'line': b'writing dependency_links to ../../build/cmd_vel_pub/cmd_vel_pub.egg-info/dependency_links.txt\n'}
+[2.358098] (cmd_vel_pub) StdoutLine: {'line': b'writing entry points to ../../build/cmd_vel_pub/cmd_vel_pub.egg-info/entry_points.txt\n'}
+[2.363889] (cmd_vel_pub) StdoutLine: {'line': b'writing requirements to ../../build/cmd_vel_pub/cmd_vel_pub.egg-info/requires.txt\n'}
+[2.374827] (cmd_vel_pub) StdoutLine: {'line': b'writing top-level names to ../../build/cmd_vel_pub/cmd_vel_pub.egg-info/top_level.txt\n'}
+[2.394410] (cmd_vel_pub) StdoutLine: {'line': b"writing manifest file '../../build/cmd_vel_pub/cmd_vel_pub.egg-info/SOURCES.txt'\n"}
+[2.443425] (cmd_vel_pub) StdoutLine: {'line': b"reading manifest file '../../build/cmd_vel_pub/cmd_vel_pub.egg-info/SOURCES.txt'\n"}
+[2.454144] (-) TimerEvent: {}
+[2.455975] (cmd_vel_pub) StdoutLine: {'line': b"writing manifest file '../../build/cmd_vel_pub/cmd_vel_pub.egg-info/SOURCES.txt'\n"}
+[2.464319] (cmd_vel_pub) StdoutLine: {'line': b'running build\n'}
+[2.477026] (cmd_vel_pub) StdoutLine: {'line': b'running build_py\n'}
+[2.489659] (cmd_vel_pub) StdoutLine: {'line': b'creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build\n'}
+[2.496900] (cmd_vel_pub) StdoutLine: {'line': b'creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib\n'}
+[2.501836] (cmd_vel_pub) StdoutLine: {'line': b'creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib/cmd_vel_pub\n'}
+[2.511850] (cmd_vel_pub) StdoutLine: {'line': b'copying cmd_vel_pub/publisher.py -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib/cmd_vel_pub\n'}
+[2.521050] (cmd_vel_pub) StdoutLine: {'line': b'copying cmd_vel_pub/__init__.py -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib/cmd_vel_pub\n'}
+[2.530550] (cmd_vel_pub) StdoutLine: {'line': b'running install\n'}
+[2.543189] (cmd_vel_pub) StdoutLine: {'line': b'running install_lib\n'}
+[2.551440] (cmd_vel_pub) StdoutLine: {'line': b'creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub\n'}
+[2.559521] (-) TimerEvent: {}
+[2.563377] (cmd_vel_pub) StdoutLine: {'line': b'copying /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib/cmd_vel_pub/publisher.py -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub\n'}
+[2.576808] (cmd_vel_pub) StdoutLine: {'line': b'copying /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/build/lib/cmd_vel_pub/__init__.py -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub\n'}
+[2.595873] (cmd_vel_pub) StdoutLine: {'line': b'byte-compiling /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub/publisher.py to publisher.cpython-310.pyc\n'}
+[2.615571] (cmd_vel_pub) StdoutLine: {'line': b'byte-compiling /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub/__init__.py to __init__.cpython-310.pyc\n'}
+[2.629963] (cmd_vel_pub) StdoutLine: {'line': b'running install_data\n'}
+[2.637362] (cmd_vel_pub) StdoutLine: {'line': b'creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/share/ament_index\n'}
+[2.648008] (cmd_vel_pub) StdoutLine: {'line': b'creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/share/ament_index/resource_index\n'}
+[2.654377] (cmd_vel_pub) StdoutLine: {'line': b'creating /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/share/ament_index/resource_index/packages\n'}
+[2.662311] (-) TimerEvent: {}
+[2.666415] (cmd_vel_pub) StdoutLine: {'line': b'copying resource/cmd_vel_pub -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/share/ament_index/resource_index/packages\n'}
+[2.672307] (cmd_vel_pub) StdoutLine: {'line': b'copying package.xml -> /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/share/cmd_vel_pub\n'}
+[2.684362] (cmd_vel_pub) StdoutLine: {'line': b'running install_egg_info\n'}
+[2.694971] (cmd_vel_pub) StdoutLine: {'line': b'Copying ../../build/cmd_vel_pub/cmd_vel_pub.egg-info to /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/python3.10/site-packages/cmd_vel_pub-0.0.0-py3.10.egg-info\n'}
+[2.762822] (-) TimerEvent: {}
+[2.807803] (cmd_vel_pub) StdoutLine: {'line': b'running install_scripts\n'}
+[2.860537] (cmd_vel_pub) StdoutLine: {'line': b'Installing publisher script to /mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/install/cmd_vel_pub/lib/cmd_vel_pub\n'}
+[2.870434] (-) TimerEvent: {}
+[2.874162] (cmd_vel_pub) StdoutLine: {'line': b"writing list of installed files to '/mnt/hgfs/BRICS-FS-58-2026/module3/ros2_ws/build/cmd_vel_pub/install.log'\n"}
+[2.937710] (cmd_vel_pub) CommandEnded: {'returncode': 0}
+[2.972686] (-) TimerEvent: {}
+[3.076424] (-) TimerEvent: {}
+[3.170248] (cmd_vel_pub) JobEnded: {'identifier': 'cmd_vel_pub', 'rc': 0}
+[3.182584] (-) TimerEvent: {}
+[3.183619] (-) EventReactorShutdown: {}

@@ -1,0 +1,16 @@
+package.xml
+setup.cfg
+setup.py
+../../build/cmd_vel_pub/cmd_vel_pub.egg-info/PKG-INFO
+../../build/cmd_vel_pub/cmd_vel_pub.egg-info/SOURCES.txt
+../../build/cmd_vel_pub/cmd_vel_pub.egg-info/dependency_links.txt
+../../build/cmd_vel_pub/cmd_vel_pub.egg-info/entry_points.txt
+../../build/cmd_vel_pub/cmd_vel_pub.egg-info/requires.txt
+../../build/cmd_vel_pub/cmd_vel_pub.egg-info/top_level.txt
+../../build/cmd_vel_pub/cmd_vel_pub.egg-info/zip-safe
+cmd_vel_pub/__init__.py
+cmd_vel_pub/publisher.py
+resource/cmd_vel_pub
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py
