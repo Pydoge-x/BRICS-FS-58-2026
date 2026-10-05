@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""LangChain 工具调用 → drive_turtle.sh → turtlesim"""
+"""LangChain 工具调用 → drive_turtle.sh → turtlesim (LangChain 1.x API)"""
 import os
 import subprocess
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
-from langchain.agents import create_tool_calling_agent, AgentExecutor
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain.agents import create_agent
 
-DRIVE = os.path.expanduser("~/lab-m4/scripts/drive_turtle.sh")
+# 用脚本自身位置定位，避免相对路径/expanduser 依赖当前工作目录
+DRIVE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "scripts", "drive_turtle.sh")
 
 
 @tool
@@ -29,16 +29,16 @@ def main():
         base_url=os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com/v1"),
         temperature=0,
     )
-    tools = [move_turtle]
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", "你是海龟控制助手。用户要运动时必须调用 move_turtle 工具。"),
-        ("human", "{input}"),
-        MessagesPlaceholder("agent_scratchpad"),
-    ])
-    agent = create_tool_calling_agent(llm, tools, prompt)
-    ex = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    # LangChain 1.x: create_agent 自带 ReAct 循环，无需 AgentExecutor / agent_scratchpad
+    agent = create_agent(
+        model=llm,
+        tools=[move_turtle],
+        system_prompt="你是海龟控制助手。用户要运动时必须调用 move_turtle 工具。",
+    )
     q = os.environ.get("USER_QUERY", "请让海龟前进，然后停")
-    print(ex.invoke({"input": q}))
+    result = agent.invoke({"messages": [{"role": "user", "content": q}]})
+    for msg in result["messages"]:
+        msg.pretty_print()
 
 
 if __name__ == "__main__":

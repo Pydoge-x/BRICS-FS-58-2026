@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import subprocess, urllib.parse, os
-DRIVE = os.path.expanduser("~/lab-m4/scripts/drive_turtle.sh")
+DRIVE = os.path.expanduser("~/桌面/BRICS2026/module4/scripts/drive_turtle.sh")
 
 class H(BaseHTTPRequestHandler):
     def do_GET(self):
