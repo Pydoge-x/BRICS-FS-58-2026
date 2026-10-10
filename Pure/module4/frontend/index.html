@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>海龟助手</title>
+  <style>
+    body { font-family: sans-serif; max-width: 720px; margin: 2rem auto; }
+    #log { border: 1px solid #ccc; min-height: 240px; padding: 1rem; white-space: pre-wrap; }
+    input, button { font-size: 1rem; padding: 0.4rem 0.6rem; }
+  </style>
+</head>
+<body>
+  <h1>海龟助手（对接 Dify）</h1>
+  <p>在下方填写 Dify API Base、Key 后发送消息；可用下方按钮直连控龟 API。</p>
+  <div>
+    API Base <input id="base" size="40" value="http://127.0.0.1:3000/v1" />
+    API Key <input id="key" size="36" type="password" />
+  </div>
+  <div id="log"></div>
+  <input id="msg" size="48" placeholder="输入问题" />
+  <button id="send">发送</button>
+  <p>
+    <button onclick="move('前进')">前进</button>
+    <button onclick="move('左转')">左转</button>
+    <button onclick="move('右转')">右转</button>
+    <button onclick="move('停')">停</button>
+    <button onclick="move('巡检')">巡检</button>
+  </p>
+  <script>
+    const log = (t) => { document.getElementById('log').textContent += t + '\n'; };
+    document.getElementById('send').onclick = async () => {
+      const base = document.getElementById('base').value.replace(/\/$/, '');
+      const key = document.getElementById('key').value.trim();
+      const query = document.getElementById('msg').value.trim();
+      log('> ' + query);
+      const resp = await fetch(base + '/chat-messages', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + key,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inputs: {},
+          query,
+          response_mode: 'blocking',
+          user: 'lab-student',
+        }),
+      });
+      const data = await resp.json();
+      log(data.answer || JSON.stringify(data, null, 2));
+    };
+    async function move(cmd) {
+      try {
+        const r = await fetch('http://127.0.0.1:5174/move?cmd=' + encodeURIComponent(cmd));
+        log(await r.text());
+      } catch (e) {
+        log('控龟 API 未启动: python3 move_api.py');
+      }
+    }
+  </script>
+</body>
+</html>
