@@ -1,0 +1,26 @@
+[
+  {
+    "file": "data\\demo\\extracurricular\\mmaction_official_demo.mp4",
+    "tag": "sport",
+    "url": "https://raw.githubusercontent.com/open-mmlab/mmaction2/main/demo/demo.mp4",
+    "preview_image": "data\\demo\\extracurricular\\images\\mmaction_official_demo_frame0.jpg"
+  },
+  {
+    "file": "data\\demo\\extracurricular\\mmaction_skeleton_demo.mp4",
+    "tag": "sport",
+    "url": "https://raw.githubusercontent.com/open-mmlab/mmaction2/main/demo/demo_skeleton.mp4",
+    "preview_image": "data\\demo\\extracurricular\\images\\mmaction_skeleton_demo_frame0.jpg"
+  },
+  {
+    "file": "data\\demo\\extracurricular\\mmaction_structuralize_demo.mp4",
+    "tag": "play",
+    "url": "https://raw.githubusercontent.com/open-mmlab/mmaction2/main/demo/test_video_structuralize.mp4",
+    "preview_image": "data\\demo\\extracurricular\\images\\mmaction_structuralize_demo_frame0.jpg"
+  },
+  {
+    "file": "data\\demo\\coco_person_demo.mp4",
+    "tag": "walk",
+    "url": "local",
+    "preview_image": "data\\demo\\extracurricular\\images\\coco_person_demo_frame0.jpg"
+  }
+]

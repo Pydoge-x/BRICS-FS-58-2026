@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>模块 B · 人体行为识别</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">B</span>
+        <div>
+          <h1>人体行为识别</h1>
+          <p>课堂 YOLO-Pose · 课外 MMAction2</p>
+        </div>
+      </div>
+      <div class="header-status" id="apiStatus">
+        <span class="dot"></span>
+        <span>检测服务…</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card demo-card">
+      <div class="demo-header">
+        <h2>快速试用 · 内置样本</h2>
+        <p class="hint">一键加载仓库 demo 数据，无需手动上传</p>
+      </div>
+      <div class="demo-grid" id="demoGrid">
+        <p class="hint">加载样本中…</p>
+      </div>
+    </section>
+
+    <section class="card upload-card">
+      <h2>上传图片或视频</h2>
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="fileInput" accept="image/*,video/*" hidden />
+        <div class="dropzone-content">
+          <div class="dropzone-icon">📁</div>
+          <p>拖拽文件到此处，或 <button type="button" class="link-btn" id="pickFile">选择文件</button></p>
+          <p class="hint">支持 JPG / PNG / WEBP / MP4 / AVI / MOV</p>
+        </div>
+      </div>
+
+      <div class="file-preview hidden" id="filePreview">
+        <div class="file-preview-header">
+          <span id="fileName"></span>
+          <span class="media-badge" id="mediaBadge"></span>
+          <button type="button" class="btn-secondary" id="clearFile">清除</button>
+        </div>
+        <div class="upload-preview" id="uploadPreview">
+          <img id="uploadPreviewImg" class="hidden" alt="上传预览" />
+          <video id="uploadPreviewVideo" class="hidden" controls playsinline></video>
+        </div>
+      </div>
+
+      <div class="options scene-options">
+        <span class="options-label">分析场景</span>
+        <div class="scene-toggle" id="sceneToggle">
+          <label class="scene-option">
+            <input type="radio" name="scene" value="classroom" checked />
+            <span>课堂</span>
+          </label>
+          <label class="scene-option">
+            <input type="radio" name="scene" value="extracurricular" />
+            <span>课外（MMAction2）</span>
+          </label>
+        </div>
+        <p class="hint scene-hint" id="sceneHint">课堂场景支持图片与视频，基于姿态关键点推断行为。</p>
+      </div>
+
+      <div class="options" id="videoOptions">
+        <label>
+          <span>最大帧数（可选，视频快速预览）</span>
+          <input type="number" id="maxFrames" placeholder="不限" min="30" max="10000" />
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" id="visualize" checked />
+          <span>生成标注结果</span>
+        </label>
+        <label class="checkbox video-only">
+          <input type="checkbox" id="exportKeyframes" checked />
+          <span>导出关键帧</span>
+        </label>
+      </div>
+
+      <button type="button" class="btn-primary" id="submitBtn" disabled>开始分析</button>
+    </section>
+
+    <section class="card progress-card hidden" id="progressCard">
+      <h2>分析进度</h2>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <p class="progress-text" id="progressText">排队中…</p>
+      <p class="progress-elapsed hidden" id="progressElapsed"></p>
+      <dl class="meta-grid" id="jobMeta"></dl>
+    </section>
+
+    <div class="toast hidden" id="toast"></div>
+
+    <section class="card results-card hidden" id="resultsCard">
+      <div class="results-header">
+        <h2>分析结果</h2>
+        <div class="tab-bar" id="tabBar">
+          <button class="tab active" data-tab="overview">概览</button>
+          <button class="tab" data-tab="tracks">行为轨迹</button>
+          <button class="tab" data-tab="annotated">标注结果</button>
+          <button class="tab" data-tab="compare">原图对比</button>
+          <button class="tab video-only-tab" data-tab="keyframes">关键帧</button>
+        </div>
+      </div>
+
+      <div class="tab-panel active" id="panel-overview">
+        <div class="stats-grid" id="statsGrid"></div>
+        <div class="behavior-chart" id="behaviorChart"></div>
+      </div>
+
+      <div class="tab-panel" id="panel-tracks">
+        <div class="table-wrap">
+          <table id="tracksTable">
+            <thead>
+              <tr>
+                <th>Track</th>
+                <th>行为</th>
+                <th>置信度</th>
+                <th>起始</th>
+                <th>结束</th>
+                <th>时长(s)</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-annotated">
+        <div class="media-viewer">
+          <img id="resultImage" class="hidden clickable-media" alt="标注图片" title="点击放大" />
+          <video id="resultVideo" class="hidden" controls playsinline></video>
+          <p class="media-hint hidden" id="resultMediaHint"></p>
+          <a class="btn-secondary download-link hidden" id="downloadAnnotated" download>下载标注文件</a>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-compare">
+        <div class="compare-grid">
+          <div class="compare-col">
+            <h3>原始文件</h3>
+            <img id="compareOriginalImg" class="hidden clickable-media" alt="原图" />
+            <video id="compareOriginalVideo" class="hidden" controls playsinline></video>
+          </div>
+          <div class="compare-col">
+            <h3>标注结果</h3>
+            <img id="compareAnnotatedImg" class="hidden clickable-media" alt="标注图" />
+            <video id="compareAnnotatedVideo" class="hidden" controls playsinline></video>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-keyframes">
+        <div class="keyframes-grid" id="keyframesGrid"></div>
+      </div>
+    </section>
+
+    <section class="card history-card">
+      <h2>最近任务</h2>
+      <ul class="job-list" id="jobList">
+        <li class="empty">暂无任务</li>
+      </ul>
+    </section>
+  </main>
+
+  <div class="lightbox hidden" id="lightbox">
+    <button type="button" class="lightbox-close" id="lightboxClose">×</button>
+    <img id="lightboxImg" alt="预览" />
+  </div>
+
+  <footer class="footer">
+    <span>REST API: <code>POST /api/v1/behavior/analyze</code></span>
+    <a href="/docs" target="_blank">Swagger 文档</a>
+  </footer>
+
+  <script src="/assets/app.js"></script>
+</body>
+</html>

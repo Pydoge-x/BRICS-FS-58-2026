@@ -1,0 +1,77 @@
+{
+  "dataset": "coco_mini",
+  "split": "val2017",
+  "num_images": 14,
+  "images": [
+    {
+      "id": 309391,
+      "file_name": "000000309391.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 139099,
+      "file_name": "000000139099.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 78748,
+      "file_name": "000000078748.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 338304,
+      "file_name": "000000338304.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 356387,
+      "file_name": "000000356387.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 345027,
+      "file_name": "000000345027.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 370486,
+      "file_name": "000000370486.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 138639,
+      "file_name": "000000138639.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 87038,
+      "file_name": "000000087038.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 507037,
+      "file_name": "000000507037.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 283785,
+      "file_name": "000000283785.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 455624,
+      "file_name": "000000455624.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 181542,
+      "file_name": "000000181542.jpg",
+      "person_count": 14
+    },
+    {
+      "id": 343561,
+      "file_name": "000000343561.jpg",
+      "person_count": 14
+    }
+  ]
+}

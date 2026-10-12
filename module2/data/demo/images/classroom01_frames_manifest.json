@@ -1,0 +1,185 @@
+{
+  "video": "data/demo/classroom01_clip_8min_1min.mp4",
+  "source_output": "output/classroom01",
+  "count": 10,
+  "behavior_coverage": {
+    "sit_listen": "坐/听讲",
+    "write": "写字",
+    "raise_hand": "举手",
+    "stand": "站立"
+  },
+  "frames": [
+    {
+      "file": "classroom01_frame_00000.jpg",
+      "frame": 0,
+      "timestamp_sec": 0.0,
+      "primary_behaviors": [
+        "sit_listen",
+        "write"
+      ],
+      "detected_behaviors": {
+        "sit_listen": 15,
+        "write": 3
+      },
+      "num_persons": 18,
+      "source": "classroom01_clip_8min_1min.mp4",
+      "source_keyframe": "c:\\bricks\\module_b_behavior\\output\\classroom01\\keyframes\\classroom01_clip_8min_1min\\frame_00000_raw.jpg"
+    },
+    {
+      "file": "classroom01_frame_00044.jpg",
+      "frame": 44,
+      "timestamp_sec": 2.2,
+      "primary_behaviors": [
+        "sit_listen",
+        "write"
+      ],
+      "detected_behaviors": {
+        "sit_listen": 11,
+        "write": 6
+      },
+      "num_persons": 17,
+      "source": "classroom01_clip_8min_1min.mp4",
+      "source_keyframe": "c:\\bricks\\module_b_behavior\\output\\classroom01\\keyframes\\classroom01_clip_8min_1min\\frame_00044_raw.jpg"
+    },
+    {
+      "file": "classroom01_frame_00112.jpg",
+      "frame": 112,
+      "timestamp_sec": 5.6,
+      "primary_behaviors": [
+        "sit_listen",
+        "write",
+        "raise_hand"
+      ],
+      "detected_behaviors": {
+        "sit_listen": 12,
+        "write": 4,
+        "raise_hand": 1,
+        "unknown": 1
+      },
+      "num_persons": 18,
+      "source": "classroom01_clip_8min_1min.mp4",
+      "source_keyframe": "c:\\bricks\\module_b_behavior\\output\\classroom01\\keyframes\\classroom01_clip_8min_1min\\frame_00112_raw.jpg"
+    },
+    {
+      "file": "classroom01_frame_00167.jpg",
+      "frame": 167,
+      "timestamp_sec": 8.36,
+      "primary_behaviors": [
+        "sit_listen",
+        "write",
+        "raise_hand"
+      ],
+      "detected_behaviors": {
+        "sit_listen": 11,
+        "write": 5,
+        "raise_hand": 1,
+        "unknown": 1
+      },
+      "num_persons": 18,
+      "source": "classroom01_clip_8min_1min.mp4",
+      "source_keyframe": "c:\\bricks\\module_b_behavior\\output\\classroom01\\keyframes\\classroom01_clip_8min_1min\\frame_00167_raw.jpg"
+    },
+    {
+      "file": "classroom01_frame_00238.jpg",
+      "frame": 238,
+      "timestamp_sec": 11.91,
+      "primary_behaviors": [
+        "sit_listen",
+        "write"
+      ],
+      "detected_behaviors": {
+        "sit_listen": 12,
+        "write": 3
+      },
+      "num_persons": 15,
+      "source": "classroom01_clip_8min_1min.mp4",
+      "source_keyframe": "c:\\bricks\\module_b_behavior\\output\\classroom01\\keyframes\\classroom01_clip_8min_1min\\frame_00238_raw.jpg"
+    },
+    {
+      "file": "classroom01_frame_00358.jpg",
+      "frame": 358,
+      "timestamp_sec": 17.91,
+      "primary_behaviors": [
+        "sit_listen",
+        "write"
+      ],
+      "detected_behaviors": {
+        "sit_listen": 13,
+        "write": 3
+      },
+      "num_persons": 16,
+      "source": "classroom01_clip_8min_1min.mp4",
+      "source_keyframe": "c:\\bricks\\module_b_behavior\\output\\classroom01\\keyframes\\classroom01_clip_8min_1min\\frame_00358_raw.jpg"
+    },
+    {
+      "file": "classroom01_frame_00547.jpg",
+      "frame": 547,
+      "timestamp_sec": 27.37,
+      "primary_behaviors": [
+        "sit_listen",
+        "write"
+      ],
+      "detected_behaviors": {
+        "sit_listen": 13,
+        "write": 4
+      },
+      "num_persons": 17,
+      "source": "classroom01_clip_8min_1min.mp4",
+      "source_keyframe": "c:\\bricks\\module_b_behavior\\output\\classroom01\\keyframes\\classroom01_clip_8min_1min\\frame_00547_raw.jpg"
+    },
+    {
+      "file": "classroom01_frame_00701.jpg",
+      "frame": 701,
+      "timestamp_sec": 35.08,
+      "primary_behaviors": [
+        "sit_listen",
+        "write",
+        "stand"
+      ],
+      "detected_behaviors": {
+        "sit_listen": 11,
+        "write": 3,
+        "stand": 1
+      },
+      "num_persons": 15,
+      "source": "classroom01_clip_8min_1min.mp4",
+      "source_keyframe": "c:\\bricks\\module_b_behavior\\output\\classroom01\\keyframes\\classroom01_clip_8min_1min\\frame_00701_raw.jpg"
+    },
+    {
+      "file": "classroom01_frame_00877.jpg",
+      "frame": 877,
+      "timestamp_sec": 43.88,
+      "primary_behaviors": [
+        "sit_listen",
+        "write",
+        "stand"
+      ],
+      "detected_behaviors": {
+        "sit_listen": 9,
+        "write": 3,
+        "stand": 1
+      },
+      "num_persons": 13,
+      "source": "classroom01_clip_8min_1min.mp4",
+      "source_keyframe": "c:\\bricks\\module_b_behavior\\output\\classroom01\\keyframes\\classroom01_clip_8min_1min\\frame_00877_raw.jpg"
+    },
+    {
+      "file": "classroom01_frame_00945.jpg",
+      "frame": 945,
+      "timestamp_sec": 47.29,
+      "primary_behaviors": [
+        "sit_listen",
+        "write",
+        "stand"
+      ],
+      "detected_behaviors": {
+        "sit_listen": 9,
+        "write": 1,
+        "stand": 1
+      },
+      "num_persons": 11,
+      "source": "classroom01_clip_8min_1min.mp4",
+      "source_keyframe": "c:\\bricks\\module_b_behavior\\output\\classroom01\\keyframes\\classroom01_clip_8min_1min\\frame_00945_raw.jpg"
+    }
+  ]
+}
