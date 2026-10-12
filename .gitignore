@@ -30,3 +30,5 @@ sw/BRICS-FS-58-2026/
 *.tar
 
 .v4
+
+.workbuddy
